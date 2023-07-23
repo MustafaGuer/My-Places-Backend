@@ -3,7 +3,7 @@ import path from "path";
 import express, { NextFunction, Request, Response } from "express";
 import { json } from "body-parser";
 import { connect } from "mongoose";
-import "dotenv/config";
+// import "dotenv/config";
 
 import placesRoutes from "./routes/places-routes";
 import usersRoutes from "./routes/users-routes";
@@ -46,8 +46,11 @@ app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
-connect(`${process.env.MONGODB_URI}`)
+connect(
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.hsqg5qy.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
+)
   .then(() => {
+    // app.listen(process.env.PORT);
     app.listen(5000);
   })
   .catch((err) => {
