@@ -51,7 +51,6 @@ connect(
 )
   .then(() => {
     app.listen(process.env.PORT);
-    // app.listen(5000);
   })
   .catch((err) => {
     console.log(err);
